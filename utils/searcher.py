@@ -1,6 +1,5 @@
 import re
 
-import googlemaps
 import requests
 import yaml
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
