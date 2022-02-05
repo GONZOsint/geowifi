@@ -1,0 +1,6 @@
+pyyaml
+requests
+folium
+google
+rich
+google-api-python-client
