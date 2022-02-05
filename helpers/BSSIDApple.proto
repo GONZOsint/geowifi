@@ -1,0 +1,19 @@
+syntax="proto3";
+
+message WifiGeo {
+string bssid = 1;
+message Location {
+int64 lat = 1;
+int64 lon = 2;
+int64 unk1 = 3;
+}
+Location location= 2;
+}
+
+message BSSIDResp {
+int64 unk1 = 1;
+repeated WifiGeo wifi = 2;
+int32 unk2 = 3;
+int32 unk3 = 4;
+string APIName = 5;
+}
