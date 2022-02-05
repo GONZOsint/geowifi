@@ -1,7 +1,0 @@
-pyyaml
-googlemaps
-requests
-folium
-google
-rich
-google-api-python-client
