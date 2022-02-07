@@ -1,7 +1,8 @@
 # geowifi
-![geowifi](https://imgur.com/pKOkeI6.png)
 
 🌎 Search WiFi geolocation data by BSSID and SSID on different public databases.
+
+![geowifi](https://imgur.com/pKOkeI6.png)
 
 ### Databases:
 - Wigle (https://wigle.net/)
@@ -10,9 +11,11 @@
 - Milnikov (https://www.mylnikov.org/)
 ---
 
+
 ## ✔️ Prerequisites
 - [Python3](https://www.python.org/download/releases/3.0/)
 ---
+
 
 ## 🛠️ Installation
 
@@ -22,7 +25,10 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install require
 python3 -m pip install -r requirements.txt
 ```
 
-❗ In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `utils/API.yaml`file with the value of the token.
+❗ In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `utils/API.yaml` file with the value of the token.
+
+---
+
 
 ## 🔎 Usage
 
@@ -37,8 +43,14 @@ optional arguments:
   -j, --json               Json output
   -m, --map                Map output
 ```
+- Search by BSSID: `python3 -b BSSID`
+- Search by SSID: `python3 -s SSID`
+
+It is possible to export the result in json using the `-j` parameter and show the results in a map using `-m`.
+
 ### 🗺️ Map output example
 ![Map output](https://imgur.com/rDBXmXv.png)
+
 ### 💾 Json output example
 ```json
 {
@@ -66,4 +78,10 @@ optional arguments:
 }
 ```
 
+---
+
+
+## Mentions
+
+This project uses some of the research and code used at [iSniff-GPS](https://github.com/hubert3/iSniff-GPS).
 
