@@ -43,8 +43,16 @@ optional arguments:
   -j, --json               Json output
   -m, --map                Map output
 ```
-- Search by BSSID: `python3 -b BSSID`
-- Search by SSID: `python3 -s SSID`
+- Search by BSSID: 
+```
+python3 geowifi.py -b BSSID
+```
+
+- Search by SSID: 
+```
+python3 geowifi.py -s SSID
+```
+
 
 It is possible to export the result in json using the `-j` parameter and show the results in a map using `-m`.
 
@@ -81,7 +89,7 @@ It is possible to export the result in json using the `-j` parameter and show th
 ---
 
 
-## Mentions
+## 📢 Mentions
 
-This project uses some of the research and code used at [iSniff-GPS](https://github.com/hubert3/iSniff-GPS).
-
+- This project uses some of the research and code used at [iSniff-GPS](https://github.com/hubert3/iSniff-GPS).
+- Thanks to [Micah Hoffman](https://twitter.com/WebBreacher) for his attention and answers to my questions.
