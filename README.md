@@ -1,3 +1,4 @@
+
 # 📡💘🌎 | geowifi  
 
 Search WiFi geolocation data by BSSID and SSID on different public databases.
@@ -95,3 +96,4 @@ It is possible to export the result in json using the `-j` parameter and show th
 
 - This project uses some of the research and code used at [iSniff-GPS](https://github.com/hubert3/iSniff-GPS).
 - Thanks to [Micah Hoffman](https://twitter.com/WebBreacher) for his attention and answers to my questions.
+- Thanks to [kennbro](https://twitter.com/kennbroorg) for lending me his scrupulous eyes to give me feedback.
