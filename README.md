@@ -15,7 +15,7 @@ Search WiFi geolocation data by BSSID and SSID on different public databases.
 ## ✔️ Prerequisites
 - [Python3](https://www.python.org/download/releases/3.0/).
 - In order to display emojis on **Windows**, it is recommended to install the [new Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701).
-- ⚠️ In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `utils/API.yaml` file with the value of the "**Encoded for use**" parameter provided by Wigle.  **This is necessary for searching by SSID**. 
+- ⚠️ In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `utils/API.yaml` file replacing the value of the "**wigle_auth**" parameter for the "**Encoded for use**" data [provided by Wigle](https://wigle.net/account).  **This is necessary for searching by SSID**. 
 
 ---
 
