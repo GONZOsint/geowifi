@@ -1,19 +1,21 @@
-# geowifi
 
-🌎 Search WiFi geolocation data by BSSID and SSID on different public databases.
+# 📡💘🌎 | geowifi  
+
+Search WiFi geolocation data by BSSID and SSID on different public databases.
 
 ![geowifi](https://imgur.com/pKOkeI6.png)
 
 ### Databases:
-- Wigle (https://wigle.net/)
+- [Wigle](https://wigle.net/)
 - Apple
-- OpenWifi (https://openwifi.su/)
-- Milnikov (https://www.mylnikov.org/)
+- [OpenWifi](https://openwifi.su/)
+- [Milnikov](https://www.mylnikov.org/)
 ---
 
 
 ## ✔️ Prerequisites
 - [Python3](https://www.python.org/download/releases/3.0/)
+- In order to display emojis on **Windows**, it is recommended to install the [new Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701)
 ---
 
 
@@ -93,3 +95,4 @@ It is possible to export the result in json using the `-j` parameter and show th
 
 - This project uses some of the research and code used at [iSniff-GPS](https://github.com/hubert3/iSniff-GPS).
 - Thanks to [Micah Hoffman](https://twitter.com/WebBreacher) for his attention and answers to my questions.
+
