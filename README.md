@@ -5,7 +5,7 @@ Search WiFi geolocation data by BSSID and SSID on different public databases.
 
 ![geowifi](https://imgur.com/pKOkeI6.png)
 
-### Databases:
+### 💾 Databases:
 - [Wigle](https://wigle.net/)
 - Apple
 - [OpenWifi](https://openwifi.su/)
