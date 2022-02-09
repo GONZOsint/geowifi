@@ -7,9 +7,25 @@ from rich import print
 
 from utils import searcher, mapper, vendorcheck
 
+
+def banner():
+    print("""
+   ██████╗ ███████╗ ██████╗   ██╗    ██╗     ███████╗ 
+  ██╔════╝ ██╔════╝██╔═══██╗  ██║    ██║ ██╗ ██╔════╝ ██╗
+  ██║  ███╗█████╗  ██║   ██║  ██║ █╗ ██║ ██║ █████╗   ██║
+  ██║   ██║██╔══╝  ██║   ██║  ██║███╗██║ ██║ ██╔══╝   ██║
+  ╚██████╔╝███████╗╚██████╔╝  ╚███╔███╔╝ ██║ ██║      ██║
+   ╚═════╝ ╚══════╝ ╚═════╝    ╚══╝╚══╝  ╚═╝ ╚═╝      ╚═╝ :globe_showing_americas: [bold purple italic]by GOΠZO[/bold purple italic]                          
+""")
+
+
+banner()
+
 parser = argparse.ArgumentParser(description='GeoWiFi, search WiFi geolocation data by BSSID and SSID')
-parser.add_argument('-s', '--ssid', type=str, help='Search by SSID')
-parser.add_argument('-b', '--bssid', type=str, help='Search by BSSID')
+group = parser.add_mutually_exclusive_group(required=True)
+
+group.add_argument('-s', '--ssid', type=str, help='Search by SSID')
+group.add_argument('-b', '--bssid', type=str, help='Search by BSSID')
 parser.add_argument('-j', '--json', action='store_true', help='Json output')
 parser.add_argument('-m', '--map', action='store_true', help='Map output')
 
@@ -36,17 +52,6 @@ bssid_json = {'data': {
         'lon': ''
     }
 }}
-
-
-def banner():
-    print("""
-   ██████╗ ███████╗ ██████╗   ██╗    ██╗     ███████╗ 
-  ██╔════╝ ██╔════╝██╔═══██╗  ██║    ██║ ██╗ ██╔════╝ ██╗
-  ██║  ███╗█████╗  ██║   ██║  ██║ █╗ ██║ ██║ █████╗   ██║
-  ██║   ██║██╔══╝  ██║   ██║  ██║███╗██║ ██║ ██╔══╝   ██║
-  ╚██████╔╝███████╗╚██████╔╝  ╚███╔███╔╝ ██║ ██║      ██║
-   ╚═════╝ ╚══════╝ ╚═════╝    ╚══╝╚══╝  ╚═╝ ╚═╝      ╚═╝ :globe_showing_americas: [bold purple italic]by GOΠZO[/bold purple italic]                          
-""")
 
 
 def check_valid_bbsi(bssid):
@@ -222,7 +227,6 @@ def map_ssid_output(json_data):
         print('')
 
 
-banner()
 if args.bssid:
     if check_valid_bbsi(args.bssid):
         bssid_data = search_bssid(args.bssid)
