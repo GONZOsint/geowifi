@@ -36,7 +36,7 @@ python3 -m pip install -r requirements.txt
 ## 🔎 Usage
 
 ```
-usage: geowifi.py [-h] [-s SSID] [-b BSSID] [-j] [-m]
+usage: geowifi.py [-h] (-s SSID | -b BSSID) [-j] [-m]
 
 
 optional arguments:
