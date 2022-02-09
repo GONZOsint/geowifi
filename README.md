@@ -57,7 +57,7 @@ python3 geowifi.py -s SSID
 ```
 
 
-It is possible to export the results in json using the `-j` parameter and show the locations in a map using `-m`.
+It is possible to export the results in json using the `-j` parameter and show the locations on a map using `-m`.
 
 ### 🗺️ Map output example
 ![Map output](https://imgur.com/rDBXmXv.png)
