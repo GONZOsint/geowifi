@@ -100,11 +100,11 @@ def apple_bssid(bssid):
     lat = re.search('lat: (\S*)', str(bssid_response)).group(1)
     if '18000000000' not in lat:
         latlist = list(str(lat))
-        latlist.insert(2, '.')
+        latlist.insert(len(latlist)-8, '.')
         lat = "".join(latlist)
         lon = re.search('lon: (\S*)', str(bssid_response)).group(1)
         lonlist = list(str(lon))
-        lonlist.insert(2, '.')
+        lonlist.insert(len(lonlist)-8, '.')
         lon = "".join(lonlist)
         data = {"bssid": bssid, "lat": lat, "lon": lon}
 
