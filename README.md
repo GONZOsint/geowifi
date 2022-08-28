@@ -30,6 +30,12 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install require
 python3 -m pip install -r requirements.txt
 ```
 
+### Docker ###
+
+```bash
+docker build -t geowifi:latest .
+```
+
 ---
 
 ## 🔎 Usage
@@ -59,6 +65,24 @@ python3 geowifi.py -s SSID
 ```
 
 It is possible to export the results in json format using the `-j` parameter and show the locations on html map using `-m`.
+
+### Docker usage ###
+
+```bash
+docker run --rm geowifi:latest
+```
+
+- Search by BSSID:
+
+```bash
+docker run --rm geowifi:latest -b BSSID
+```
+
+- Search by SSID:
+
+```bash
+docker run --rm geowifi:latest -s SSID
+```
 
 ### 🗺️ Map output example
 
