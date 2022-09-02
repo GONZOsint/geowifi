@@ -66,7 +66,7 @@ python3 geowifi.py -s SSID
 
 It is possible to export the results in json format using the `-j` parameter and show the locations on html map using `-m`.
 
-### Docker usage ###
+### 🐳 Docker usage ###
 
 ```bash
 docker run --rm geowifi:latest
