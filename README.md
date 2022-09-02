@@ -5,21 +5,22 @@ Search WiFi geolocation data by BSSID and SSID on different public databases.
 
 ![geowifi](https://imgur.com/pKOkeI6.png)
 
-### 💾 Databases:
+### 💾 Databases
+
 - [Wigle](https://wigle.net/)
 - Apple
 - [OpenWifi](https://openwifi.su/)
 - [Milnikov](https://www.mylnikov.org/)
----
 
+---
 
 ## ✔️ Prerequisites
+
 - [Python3](https://www.python.org/download/releases/3.0/).
 - In order to display emojis on **Windows**, it is recommended to install the [new Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701).
-- ⚠️ In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `utils/API.yaml` file replacing the value of the "**wigle_auth**" parameter for the "**Encoded for use**" data [provided by Wigle](https://wigle.net/account).  **This is necessary for searching by SSID**. 
+- ⚠️ In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `utils/API.yaml` file replacing the value of the "**wigle_auth**" parameter for the "**Encoded for use**" data [provided by Wigle](https://wigle.net/account).  **This is necessary for searching by SSID**.
 
 ---
-
 
 ## 🛠️ Installation
 
@@ -29,9 +30,13 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install require
 python3 -m pip install -r requirements.txt
 ```
 
+### Docker ###
+
+```bash
+docker build -t geowifi:latest .
+```
 
 ---
-
 
 ## 🔎 Usage
 
@@ -46,23 +51,45 @@ optional arguments:
   -j, --json               Json output
   -m, --map                Map output
 ```
-- Search by BSSID: 
+
+- Search by BSSID:
+
 ```
 python3 geowifi.py -b BSSID
 ```
 
-- Search by SSID: 
+- Search by SSID:
+
 ```
 python3 geowifi.py -s SSID
 ```
 
-
 It is possible to export the results in json format using the `-j` parameter and show the locations on html map using `-m`.
 
+### Docker usage ###
+
+```bash
+docker run --rm geowifi:latest
+```
+
+- Search by BSSID:
+
+```bash
+docker run --rm geowifi:latest -b BSSID
+```
+
+- Search by SSID:
+
+```bash
+docker run --rm geowifi:latest -s SSID
+```
+
 ### 🗺️ Map output example
+
 ![Map output](https://imgur.com/rDBXmXv.png)
 
 ### 💾 Json output example
+
 ```json
 {
    "data":{
@@ -90,7 +117,6 @@ It is possible to export the results in json format using the `-j` parameter and
 ```
 
 ---
-
 
 ## 📢 Mentions
 
