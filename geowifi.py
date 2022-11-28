@@ -127,7 +127,8 @@ def search_bssid(bssid):
         else:
             bssid_json['data']['wigle']['lat'] = 'not_found'
             bssid_json['data']['wigle']['lon'] = 'not_found'
-    except:
+    except Exception as e:
+        # print(e)
         print('[bold][red] [!][/red] Error obtaining Wigle data[/bold]')
         bssid_json['data']['wigle']['lat'] = 'not_found'
         bssid_json['data']['wigle']['lon'] = 'not_found'
