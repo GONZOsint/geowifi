@@ -11,6 +11,10 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 with open('utils/API.yaml', 'r') as APIconfig:
     cfg = yaml.load(APIconfig, Loader=CLoader)
+    sslVerify = True
+    if cfg.get('no-ssl-verify',None):
+        sslVerify = False
+
 
 
 def wigle_bssid(bssid):
@@ -22,14 +26,15 @@ def wigle_bssid(bssid):
         params = (
             ('netid', bssid),
         )
-        response = requests.get('https://api.wigle.net/api/v2/network/detail', headers=headers, params=params)
-        if response.json()['success'] == 'true':
-            lat = response.json()['results'][0]['trilat']
-            lon = response.json()['results'][0]['trilong']
-            ssid = response.json()['results'][0]['ssid']
-            data = {"bssid": bssid, "ssid": ssid, "lat": lat, "lon": lon}
+        response = requests.get('https://api.wigle.net/api/v2/network/detail', headers=headers, params=params, verify = sslVerify)
+        if response.json()['success'] == 'true' or response.json()['success'] == True:
 
-            return data
+            for R in response.json()['results']:
+                lat = R['trilat']
+                lon = R['trilong']
+                ssid = R['ssid']
+                data = {"bssid": bssid, "ssid": ssid, "lat": lat, "lon": lon}
+                return data
     else:
         return 'AUTH code not configured or API limit exceeded'
 
@@ -46,7 +51,7 @@ def wigle_ssid(ssid):
             ('paynet', 'false'),
             ('ssid', ssid)
         )
-        response = requests.get('https://api.wigle.net/api/v2/network/search', headers=headers, params=params)
+        response = requests.get('https://api.wigle.net/api/v2/network/search', headers=headers, params=params, verify = sslVerify)
         if response.json()['success']:
             json_data = {'results': []}
             for result in response.json()['results']:
@@ -63,7 +68,7 @@ def wigle_ssid(ssid):
 
 
 def milnikov_bssid(bssid):
-    response = requests.get('https://api.mylnikov.org/geolocation/wifi?v=1.1&data=open&bssid=' + bssid)
+    response = requests.get('https://api.mylnikov.org/geolocation/wifi?v=1.1&data=open&bssid=' + bssid, verify = sslVerify)
     if response.json()['result'] == 200:
         lat = response.json()['data']['lat']
         lon = response.json()['data']['lon']
@@ -73,7 +78,7 @@ def milnikov_bssid(bssid):
 
 
 def openwifi_bssid(bssid):
-    response = requests.get('https://openwifi.su/api/v1/bssids/' + bssid.replace(':', ''))
+    response = requests.get('https://openwifi.su/api/v1/bssids/' + bssid.replace(':', ''), verify = sslVerify)
     if 'BSSIDISNULL' not in response.text:
         if response.json()['count_results'] != 0:
             lat = response.json()['lat']

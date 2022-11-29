@@ -1,1 +1,2 @@
 wigle_auth: XXXXX
+#no-ssl-verify: yes
