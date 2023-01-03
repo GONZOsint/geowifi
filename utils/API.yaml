@@ -1,2 +1,4 @@
-wigle_auth: XXXXX
-#no-ssl-verify: yes
+wigle_auth: XXXX
+google_api: XXXX
+combain_api: XXXX
+no-ssl-verify: yes
