@@ -3,4 +3,4 @@ requests
 folium
 google
 rich
-protobuf == 3.20
+protobuf == 3.19.5
