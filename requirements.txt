@@ -1,7 +1,6 @@
-pyyaml
+PyYAML
 requests
 folium
 google
 rich
-google-api-python-client
-protobuf == 3.19.5
+protobuf == 3.20
