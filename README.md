@@ -119,7 +119,7 @@ docker run --rm geowifi:latest -s ssid <input>
     "module": "google", 
     "bssid": "C8:XX:XX:XX:5E:45", 
     "latitude": 33.571844, 
-    "longitude": -111.8827697
+    "longitude": -1XX.XXXXX97
   }, 
   {
     "module": "combain", 
@@ -135,19 +135,19 @@ docker run --rm geowifi:latest -s ssid <input>
     "module": "apple", 
     "bssid": "C8:XX:XX:XX:5E:45", 
     "latitude": 33.57198715, 
-    "longitude": -111.88282012}, 
+    "longitude": -1XX.XXXXX12}, 
   {
     "module": "wigle", 
     "bssid": "C8:XX:XX:XX:5E:45", 
     "ssid": "Vertigo", 
     "latitude": 33.60998154, 
-    "longitude": -111.88710022}, 
+    "longitude": -1XX.XXXXX22}, 
   {
     "module": "wifidb", 
     "bssid": "C8:XX:XX:XX:5E:45", 
     "ssid": "Vertigo", 
     "latitude": 33.6109, 
-    "longitude": -111.8870533
+    "longitude": -1XX.XXXXX533
   }
 ]
 ```
