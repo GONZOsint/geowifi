@@ -3,22 +3,41 @@
 
 Search WiFi geolocation data by BSSID and SSID on different public databases.
 
-![geowifi](https://imgur.com/pKOkeI6.png)
+![geowifi](https://imgur.com/C4eZL2P.png)
 
 ### 💾 Databases
 
-- [Wigle](https://wigle.net/)
-- Apple
-- [OpenWifi](https://openwifi.su/)
-- [Milnikov](https://www.mylnikov.org/)
+
+| **[Wigle](https://wigle.net/)**       | **Apple**                           | **[Google](https://developers.google.com/maps/documentation/geolocation/overview)** | **[Milnikov](https://www.mylnikov.org/)**             |
+|---------------------------------------|-------------------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------|
+| **[WifiDB](https://www.wifidb.net/)** | **[Combain](https://combain.com/)** | **[Freifunk Carte](https://www.freifunk-karte.de/)**                                | **❌ (Discontinued) [OpenWifi](https://openwifi.su/)** |
 
 ---
 
-## ✔️ Prerequisites
+## ✔️Prerequisites
 
 - [Python3](https://www.python.org/download/releases/3.0/).
 - In order to display emojis on **Windows**, it is recommended to install the [new Windows terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701).
-- ⚠️ In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `utils/API.yaml` file replacing the value of the "**wigle_auth**" parameter for the "**Encoded for use**" data [provided by Wigle](https://wigle.net/account).  **This is necessary for searching by SSID**.
+
+---
+
+## 🔑 APIs and configuration file
+
+The tool has a configuration file in the `gw_utils` folder called **config.yaml**. Each of the configuration parameters and how to obtain the necessary information is explained below:
+
+
+- ### **wigle_auth**: 
+In order to use the Wigle service it is necessary to [obtain an API](https://api.wigle.net/)  and configure the `gw_utils/config.yaml` file replacing the value of the "**wigle_auth**" parameter for the "**Encoded for use**" data [provided by Wigle](https://wigle.net/account).
+
+- ### **google_api**: 
+In order to use the [Google Geolocation Services](https://developers.google.com/maps/documentation/geolocation/overview) it is necessary to [obtain an API](https://developers.google.com/maps/documentation/geolocation/get-api-key)  and configure the `gw_utils/config.yaml` file replacing the value of the "**google_api**" parameter for the "**API**" provided. Google provides $200 of free monthly usage.
+
+- ### **combain_api**: 
+In order to use the [Combain API](https://combain.com/api/) it is necessary to [obtain an API](https://portal.combain.com/#/auth/register)  and configure the `gw_utils/config.yaml` file replacing the value of the "**combain_api**" parameter for the "**API**" provided. Combain provides a free trial and paid plans.
+
+
+- ### **no-ssl-verify**: 
+Option to enable or disable the SSL verification process on requests.
 
 ---
 
@@ -41,30 +60,34 @@ docker build -t geowifi:latest .
 ## 🔎 Usage
 
 ```
-usage: geowifi.py [-h] (-s SSID | -b BSSID) [-j] [-m]
+usage: geowifi.py [-h] [-s {bssid,ssid}] [-o {map,json}] identifier
 
+Search for information about a network with a specific BSSID or SSID.
 
-optional arguments:
-  -h, --help               Show this help message and exit
-  -s SSID, --ssid SSID     Search by SSID
-  -b BSSID, --bssid BSSID  Search by BSSID
-  -j, --json               Json output
-  -m, --map                Map output
+positional arguments:
+  identifier            The BSSID or SSID of the network to search for.
+
+options:
+  -h, --help            show this help message and exit
+  -s {bssid,ssid}, --search-by {bssid,ssid}
+                        Specifies whether to search by BSSID or SSID (default: bssid)
+  -o {map,json}, --output-format {map,json}
+                        Specifies the output format for the search results (default: map)
 ```
 
 - Search by BSSID:
 
 ```
-python3 geowifi.py -b BSSID
+python3 geowifi.py -s bssid <input>
 ```
 
 - Search by SSID:
 
 ```
-python3 geowifi.py -s SSID
+python3 geowifi.py -s ssid <input>
 ```
 
-It is possible to export the results in json format using the `-j` parameter and show the locations on html map using `-m`.
+It is possible to export the results in json format using the `-o json` parameter and show the locations on html map using `-o map`.
 
 ### 🐳 Docker usage ###
 
@@ -75,45 +98,58 @@ docker run --rm geowifi:latest
 - Search by BSSID:
 
 ```bash
-docker run --rm geowifi:latest -b BSSID
+docker run --rm geowifi:latest -s bssid <input>
 ```
 
 - Search by SSID:
 
 ```bash
-docker run --rm geowifi:latest -s SSID
+docker run --rm geowifi:latest -s ssid <input>
 ```
 
 ### 🗺️ Map output example
 
-![Map output](https://imgur.com/rDBXmXv.png)
+![Map output](https://imgur.com/CilV4LR.png)
 
 ### 💾 Json output example
 
 ```json
-{
-   "data":{
-      "bssid":"A0:XX:XX:XX:6F:90",
-      "vendor":"TP-LINK TECHNOLOGIES CO.,LTD.",
-      "mac_type":"MA-L",
-      "wigle":{
-         "lat":00.000908922099,
-         "lon":00.000945220028
-      },
-      "apple":{
-         "lat":"not_found",
-         "lon":"not_found"
-      },
-      "openwifi":{
-         "lat":00.000808900099,
-         "lon":00.000845500028
-      },
-      "milnikov":{
-         "lat":"not_found",
-         "lon":"not_found"
-      }
-   }
-}
+[
+  {
+    "module": "google", 
+    "bssid": "C8:XX:XX:XX:5E:45", 
+    "latitude": 33.571844, 
+    "longitude": -111.8827697
+  }, 
+  {
+    "module": "combain", 
+    "error": "Not enough witooth"}, 
+  {
+    "module": "mylnikov", 
+    "error": "Object was not found"
+  },
+  {
+    "module": "vendor_check", 
+    "vendor": "Cisco-Linksys, LLC"}, 
+  {
+    "module": "apple", 
+    "bssid": "C8:XX:XX:XX:5E:45", 
+    "latitude": 33.57198715, 
+    "longitude": -111.88282012}, 
+  {
+    "module": "wigle", 
+    "bssid": "C8:XX:XX:XX:5E:45", 
+    "ssid": "Vertigo", 
+    "latitude": 33.60998154, 
+    "longitude": -111.88710022}, 
+  {
+    "module": "wifidb", 
+    "bssid": "C8:XX:XX:XX:5E:45", 
+    "ssid": "Vertigo", 
+    "latitude": 33.6109, 
+    "longitude": -111.8870533
+  }
+]
 ```
 
 ---
