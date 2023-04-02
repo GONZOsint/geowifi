@@ -725,7 +725,11 @@ def vendor_check(bssid):
         return data
     except requests.exceptions.RequestException as e:
         # Return an error message if an exception occurs
-        return {'error': str(e)}
+        return {
+            'module': 'vendor_check',
+            'vendor': 'Unknown',
+            'error': str(e)
+        }
 
 
 def search_networks(bssid=None, ssid=None):
