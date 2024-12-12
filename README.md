@@ -43,9 +43,22 @@ Option to enable or disable the SSL verification process on requests.
 
 ## 🛠️ Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements.
+Start by cloning locally the GitHub repo then enter into the geowifi folder.
+git must be present on your system
+```bash
+git clone https://github.com/GONZOsint/geowifi
+cd ./geowifi/
+```
+
+Alternative is to use https://github.com/GONZOsint/geowifi/archive/refs/heads/main.zip then unzip the downloaded file.
+
+### Use local Python ##
+
+Note: Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements.
 
 ```bash
+virtualenv geowifi
+source geowifi/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
