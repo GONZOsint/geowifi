@@ -472,8 +472,8 @@ def apple_bssid(bssid_param):
         bssid_response.ParseFromString(response.content[10:])
     except DecodeError as e:
         return f'Failed to decode response: {e}'
-    lat_match = re.search('lat: (\S*)', str(bssid_response))
-    lon_match = re.search('lon: (\S*)', str(bssid_response))
+    lat_match = re.search(r'lat: (\S*)', str(bssid_response))
+    lon_match = re.search(r'lon: (\S*)', str(bssid_response))
     try:
         # Extract the latitude and longitude values from the response
         lat = lat_match.group(1)
