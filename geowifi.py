@@ -929,7 +929,7 @@ parser = argparse.ArgumentParser(description='Search for information about a net
 parser.add_argument('identifier', help='The BSSID or SSID of the network to search for.')
 parser.add_argument('-s', '--search-by', choices=['bssid', 'ssid'], default='bssid',
                     help='Specifies whether to search by BSSID or SSID (default: bssid)')
-parser.add_argument('-o', '--output-format', choices=['map', 'json'], default='html',
+parser.add_argument('-o', '--output-format', choices=['map', 'json'], default='map',
                     help='Specifies the output format for the search results (default: map)')
 
 # Print banner
@@ -958,20 +958,22 @@ elif search_by == 'ssid':
 print_results_table(search_results)
 
 # Save the search results in the specified output format
+results_dir = os.path.join(os.getcwd(), 'results')
+os.makedirs(results_dir, exist_ok=True)
 if output_format == 'map':
     # Create a map with markers for the search results
     map = create_map(search_results)
     # Save the map to an HTML file
-    map.save('results/' + str(args.identifier).replace(':', '_') + '.html')
-    filepath = os.getcwd()
+    map.save(os.path.join(results_dir, str(args.identifier).replace(':', '_') + '.html'))
+    filepath = results_dir
     console.print(' [:green_circle:] [bright_yellow]Map saved at[/bright_yellow]: [bright_blue]' + str(
-        filepath) + '\\results\\' + str(args.identifier).replace(':', '_') + '.html[/bright_blue]')
+        filepath) + '/' + str(args.identifier).replace(':', '_') + '.html[/bright_blue]')
     print()
 elif output_format == 'json':
     # Save the search results to a JSON file
-    with open('results/' + str(args.identifier).replace(':', '_') + '.json', 'w') as outfile:
+    with open(os.path.join(results_dir, str(args.identifier).replace(':', '_') + '.json'), 'w') as outfile:
         json.dump(search_results, outfile)
-    filepath = os.getcwd()
+    filepath = results_dir
     console.print(' [:green_circle:] [bright_yellow]Json file saved at[/bright_yellow]: [bright_blue]' + str(
-        filepath) + '\\results\\' + str(args.identifier).replace(':', '_') + '.json[/bright_blue]')
+        filepath) + '/' + str(args.identifier).replace(':', '_') + '.json[/bright_blue]')
     print()
