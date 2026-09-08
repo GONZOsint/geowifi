@@ -21,6 +21,7 @@ from helpers.BSSIDApple_pb2 import BSSIDResp
 
 console = Console()
 requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
+REQUEST_TIMEOUT = 20
 
 
 def banner():
@@ -83,7 +84,7 @@ def wigle_ssid(ssid_param):
             headers=headers,
             params=params,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # If the request is successful
         if response.json()['success']:
@@ -152,7 +153,7 @@ def wifidb_ssid(ssid_param):
             endpoint,
             params=params,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # If the request is successful
         if response.status_code == 200:
@@ -213,7 +214,7 @@ def openwifimap_ssid(ssid_param):
             headers=headers,
             json=data,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # If the request is successful
         if response.status_code == 200:
@@ -268,7 +269,7 @@ def freifunk_karte_ssid(ssid_param):
         response = requests.get(
             endpoint,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # If the request is successful
         if response.status_code == 200:
@@ -334,7 +335,7 @@ def wigle_bssid(bssid_param):
             headers=headers,
             params=params,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # If the request is successful
         if response.json()['success']:
@@ -403,7 +404,7 @@ def mylnikov_bssid(bssid_param):
             headers=headers,
             params=params,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # Check if the request was successful
         if response.json()['result'] == 200:
@@ -460,11 +461,19 @@ def apple_bssid(bssid_param):
     # Set the endpoint for the request
     endpoint = 'https://gs-loc.apple.com/clls/wloc'
     # Make the HTTP POST request using the requests library
-    response = requests.post(
-        endpoint,
-        headers=headers,
-        data=data,
-        verify=not parsed_config.get('no-ssl-verify', False))
+    try:
+        response = requests.post(
+            endpoint,
+            headers=headers,
+            data=data,
+            verify=not parsed_config.get('no-ssl-verify', False),
+            timeout=REQUEST_TIMEOUT
+        )
+    except requests.exceptions.RequestException as e:
+        return {
+            'module': 'apple',
+            'error': str(e)
+        }
 
     # Parse the binary content of the response into a BSSIDResp protobuf object.
     bssid_response = BSSIDResp()
@@ -549,7 +558,7 @@ def google_bssid(bssid_param):
             endpoint,
             headers=headers,
             json=params,
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # Check if the request was successful
         if response.status_code == 200:
@@ -611,7 +620,7 @@ def combain_bssid(bssid_param):
             headers=headers,
             json=params,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # If the request is successful
         if response.status_code == 200:
@@ -672,7 +681,7 @@ def wifidb_bssid(bssid_param):
             endpoint,
             params=params,
             # Disable SSL verification if specified in the configuration data
-            verify=not parsed_config.get('no-ssl-verify', False)
+            verify=not parsed_config.get('no-ssl-verify', False), timeout=REQUEST_TIMEOUT
         )
         # If the request is successful
         if response.status_code == 200:
@@ -713,7 +722,7 @@ def vendor_check(bssid):
 
     try:
         # Send a GET request to the macvendors.com API, with the BSSID as a parameter
-        response = requests.get('https://api.macvendors.com/' + bssid)
+        response = requests.get('https://api.macvendors.com/' + bssid, timeout=REQUEST_TIMEOUT)
         # Raise an exception if the response indicates that an error occurred
         response.raise_for_status()
         # Extract the vendor information from the response
